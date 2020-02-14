@@ -1,0 +1,21 @@
+<div class="navbar">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span>S-Shop</span>
+      <span class="spacer"></span>
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon class="icon">menu</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item [routerLink]="[allRotes.private.common.home]">
+          <mat-icon>account_circle</mat-icon>
+          <span>Visitante</span>
+        </button>
+        <button mat-menu-item [routerLink]="[allRotes.private.admin.productList]">
+          <mat-icon>account_circle</mat-icon>
+          <span>Administrador</span>
+        </button>
+      </mat-menu>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div>

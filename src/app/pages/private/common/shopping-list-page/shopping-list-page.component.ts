@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-shopping-list-page',
   templateUrl: './shopping-list-page.component.html',
-  styleUrls: ['./shopping-list-page.component.scss']
+  styleUrls: ['./shopping-list-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ShoppingListPageComponent implements OnInit {
 

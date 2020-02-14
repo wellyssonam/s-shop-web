@@ -5,9 +5,12 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "test": "ng test",
+    "test": "ng test --progress=false",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "test:once": "ng test --progress=false --watch=false",
+    "test:debug": "ng t --progress=false --browsers=Chrome",
+    "build:start": "ng b --prod && npm start"
   },
   "private": true,
   "dependencies": {
@@ -16,6 +19,7 @@
     "@angular/common": "~8.2.9",
     "@angular/compiler": "~8.2.9",
     "@angular/core": "~8.2.9",
+    "@angular/flex-layout": "^9.0.0-beta.29",
     "@angular/forms": "~8.2.9",
     "@angular/material": "^8.2.3",
     "@angular/platform-browser": "~8.2.9",
