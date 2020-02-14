@@ -8,15 +8,8 @@ const routes: Routes = [
       {
         path: '',
         loadChildren: () =>
-          import('./common/home-page/home-page.module').then(
-            module => module.HomePageModule
-          ),
-      },
-      {
-        path: 'admin',
-        loadChildren: () =>
-          import('./admin/product-list-admin-page/product-list-admin-page.module').then(
-            module => module.ProductListAdminPageModule
+          import('./common/private-common-pages.module').then(
+            module => module.PrivateCommonPagesModule
           ),
       },
     ],

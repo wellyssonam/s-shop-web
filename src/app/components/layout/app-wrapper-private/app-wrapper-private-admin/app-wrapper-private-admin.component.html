@@ -1,0 +1,15 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav mode="side" opened>
+    <div fxLayout="column">
+      <div class="sidenav-item">
+        <a [routerLink]="allRoutes.private.admin.productList">Produtos</a>
+      </div>
+      <div class="sidenav-item">
+        <a [routerLink]="allRoutes.private.admin.orderList">Compras</a>
+      </div>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

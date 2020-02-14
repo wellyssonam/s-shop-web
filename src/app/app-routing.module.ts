@@ -5,10 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () =>
-      import('./pages/private/private-page.module').then(
-        module => module.PrivatePageModule
-      ),
+    loadChildren: () => import('./pages/pages.module').then(module => module.PagesModule),
   }
 ];
 
