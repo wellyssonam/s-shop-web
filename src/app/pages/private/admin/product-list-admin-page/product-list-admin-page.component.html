@@ -1,3 +1,5 @@
-<ng-container>
-  <app-product-form></app-product-form>
+<ng-container *ngIf="productList$ | async as productList">
+  <app-product-form [products]="productList"></app-product-form>
+  <app-product-list [products]="productList" [showAmountLine]="false">
+  </app-product-list>
 </ng-container>

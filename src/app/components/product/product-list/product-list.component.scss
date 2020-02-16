@@ -1,0 +1,26 @@
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.text-right {
+  text-align: right;
+}
+
+tr.mat-footer-row {
+  font-weight: bold;
+}
+
+.paginator {
+  width: 100%;
+  background: #fff;
+  margin-top: 30px;
+  mat-paginator {
+    width: fit-content;
+    margin: 0px auto;
+  }
+}

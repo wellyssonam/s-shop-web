@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ProductServiceModule } from './../../../services/product-service.module';
 import { ProductFormComponent } from './product-form.component';
 
 @NgModule({
@@ -17,7 +19,9 @@ import { ProductFormComponent } from './product-form.component';
     MatInputModule,
     MatIconModule,
     MatButtonModule,
+    MatSnackBarModule,
     FlexLayoutModule,
+    ProductServiceModule,
   ],
   exports: [
     ProductFormComponent,

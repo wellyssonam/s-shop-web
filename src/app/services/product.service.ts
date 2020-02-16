@@ -19,7 +19,10 @@ export class ProductService {
   constructor(private http: HttpClient) { }
 
   list(): Observable<Product[]> {
-    console.log('list');
     return this.http.get<Product[]>(API_URL + '/product');
+  }
+
+  post(query): any {
+    return this.http.post<Product>(API_URL + '/product', query);
   }
 }
