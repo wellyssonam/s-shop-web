@@ -6,7 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { ProductServiceModule } from './../../../services/product-service.module';
+import { ProductServiceModule } from 'src/app/services/product';
 import { ProductFormComponent } from './product-form.component';
 
 @NgModule({

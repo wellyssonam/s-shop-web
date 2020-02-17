@@ -7,7 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
-import { ProductServiceModule } from 'src/app/services/product-service.module';
+import { ProductServiceModule } from 'src/app/services/product';
 import { ProductListComponent } from './product-list.component';
 
 

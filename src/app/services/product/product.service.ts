@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Product } from '../models/product/product.model';
+import { Product } from 'src/app/models/product/product.model';
 
 const API_URL = 'https://s-shop-test.herokuapp.com';
 

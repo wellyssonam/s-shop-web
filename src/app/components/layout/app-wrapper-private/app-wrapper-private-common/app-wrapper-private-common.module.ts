@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { RouterModule } from '@angular/router';
+import { ShoppingListModule } from 'src/app/services/shopping-list/shopping-list.module';
 import { AppWrapperPrivateCommonComponent } from './app-wrapper-private-common.component';
 
 
@@ -11,6 +12,7 @@ import { AppWrapperPrivateCommonComponent } from './app-wrapper-private-common.c
   imports: [
     CommonModule,
     MatSidenavModule,
+    ShoppingListModule,
     RouterModule,
   ],
   exports: [AppWrapperPrivateCommonComponent],

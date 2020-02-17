@@ -3,7 +3,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { BehaviorSubject, ReplaySubject } from 'rxjs';
 import { Product } from 'src/app/models/product/product.model';
-import { ProductService } from 'src/app/services/product.service';
+import { ProductService } from 'src/app/services/product';
+import { ShoppingListService } from './../../../services/shopping-list/shopping-list.service';
 
 @Component({
   selector: 'app-product-list',
@@ -13,7 +14,7 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class ProductListComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'description', 'value', 'button'];
+  displayedColumns: string[] = ['name', 'description', 'value', 'buttonQuantity', 'button'];
 
   dataSource;
 
@@ -35,7 +36,12 @@ export class ProductListComponent implements OnInit {
 
   @Input() showAmountLine: boolean;
 
-  constructor(private productService: ProductService) { }
+  @Input() addButton: boolean;
+
+  constructor(
+    private productService: ProductService,
+    private shoppingListService: ShoppingListService,
+  ) { }
 
   ngOnInit(): void {
     this.buildTable();
@@ -43,8 +49,40 @@ export class ProductListComponent implements OnInit {
 
   buildTable() {
     this.loading$.next(true);
+    this.initializaLocalStorage();
+    if (this.addButton) {
+      this.displayedColumns = this.displayedColumns.filter(res => res !== 'button');
+    } else {
+      this.displayedColumns = this.displayedColumns.filter(res => res !== 'buttonQuantity');
+    }
+    this.shoppingListService.setPurchasesCount(this.getLocalStorageItemsLength());
     this.setCurrentDataSource(this.products);
     this.loading$.next(false);
+  }
+
+  initializaLocalStorage() {
+    if (JSON.parse(localStorage.getItem('shoppingList')) == null) {
+      localStorage.setItem('shoppingList', JSON.stringify(
+        {
+          userId: 85,
+          items: [],
+        }
+      ));
+    }
+  }
+
+  updateLocalStorage(productList) {
+    localStorage.setItem('shoppingList', JSON.stringify(
+      {
+        userId: 85,
+        items: productList,
+      }
+    ));
+  }
+
+  getLocalStorageItemsLength() {
+    const data = JSON.parse(localStorage.getItem('shoppingList'));
+    return data !== null ? data.items.length : 0;
   }
 
   setCurrentDataSource(products) {
@@ -84,5 +122,14 @@ export class ProductListComponent implements OnInit {
   handleDeleteProductSuccess(id) {
     const products = this.products.filter(data => data.id !== id);
     this.setCurrentDataSource(products);
+  }
+
+  addPurchase(item, $event) {
+    console.log('>>>>');
+    const productList = JSON.parse(localStorage.getItem('shoppingList')).items;
+    productList.push({ product_id: item.id, amount: $event.value });
+    this.updateLocalStorage(productList);
+    this.shoppingListService.setPurchasesCount(productList.length);
+    $event.value = '';
   }
 }

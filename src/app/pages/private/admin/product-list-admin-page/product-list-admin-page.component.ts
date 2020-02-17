@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
-import { Product } from './../../../../models/product/product.model';
-import { ProductService } from './../../../../services/product.service';
+import { Product } from 'src/app/models/product/product.model';
+import { ProductService } from 'src/app/services/product';
 
 @Component({
   selector: 'app-product-list-admin-page',

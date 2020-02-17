@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Product } from 'src/app/models/product/product.model';
-import { ProductService } from 'src/app/services/product.service';
+import { ProductService } from 'src/app/services/product';
 
 @Component({
   selector: 'app-product-form',
@@ -15,7 +15,10 @@ export class ProductFormComponent implements OnInit {
 
   @Input() products: Product[];
 
-  constructor(private productService: ProductService, private snackBar: MatSnackBar) { }
+  constructor(
+    private productService: ProductService,
+    private snackBar: MatSnackBar,
+  ) { }
 
   ngOnInit() {
     this.newProduct();

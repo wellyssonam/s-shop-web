@@ -1,4 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ReplaySubject } from 'rxjs';
+import { Product } from 'src/app/models/product/product.model';
+import { ProductService } from 'src/app/services/product/product.service';
 
 @Component({
   selector: 'app-home-page',
@@ -8,9 +11,17 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 })
 export class HomePageComponent implements OnInit {
 
-  constructor() { }
+  productList$ = new ReplaySubject<Product[]>();
+
+  constructor(private productService: ProductService) { }
 
   ngOnInit() {
+    this.fetchAllProduct();
   }
 
+  fetchAllProduct() {
+    return this.productService.list().subscribe(res => {
+      this.productList$.next(res);
+    });
+  }
 }
