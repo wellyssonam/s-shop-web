@@ -3,6 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { BehaviorSubject, ReplaySubject } from 'rxjs';
 import { Product } from 'src/app/models/product/product.model';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-product-list',
@@ -34,17 +35,21 @@ export class ProductListComponent implements OnInit {
 
   @Input() showAmountLine: boolean;
 
-  constructor() { }
+  constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
     this.buildTable();
   }
 
   buildTable() {
-    let dataSourceAux;
-
     this.loading$.next(true);
-    this.dataSource = new MatTableDataSource(this.products);
+    this.setCurrentDataSource(this.products);
+    this.loading$.next(false);
+  }
+
+  setCurrentDataSource(products) {
+    let dataSourceAux;
+    this.dataSource = new MatTableDataSource(products);
     this.dataSource.paginator = this.showAmountLine ? null : this.paginator;
     dataSourceAux = this.dataSource.filteredData;
     if (!this.showAmountLine) {
@@ -53,7 +58,6 @@ export class ProductListComponent implements OnInit {
       this.paginationRef.nativeElement.style.display = 'none';
     }
     this.totalCost$.next(this.getTotalCost(dataSourceAux));
-    this.loading$.next(false);
   }
 
   applyFilter(event: Event) {
@@ -73,7 +77,12 @@ export class ProductListComponent implements OnInit {
     return dataSource.map(t => t.price).reduce((acc, value) => acc + value, 0);
   }
 
-  deleteProduct() {
-    console.log('>>> delete Product');
+  deleteProduct(id) {
+    this.productService.delete(id).subscribe(res => this.handleDeleteProductSuccess(id));
+  }
+
+  handleDeleteProductSuccess(id) {
+    const products = this.products.filter(data => data.id !== id);
+    this.setCurrentDataSource(products);
   }
 }

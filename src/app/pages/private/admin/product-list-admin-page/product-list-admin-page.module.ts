@@ -16,6 +16,7 @@ import { ProductListAdminPageComponent } from './product-list-admin-page.compone
     ProductListAdminPageRoutingModule,
     ProductServiceModule,
     ProductListModule,
-  ]
+  ],
+  exports: [ProductListAdminPageComponent],
 })
 export class ProductListAdminPageModule { }

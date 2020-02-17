@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ProductListAdminPageComponent } from './product-list-admin-page.component';
+import { ProductListAdminPageModule } from './product-list-admin-page.module';
+
 
 describe('ProductListAdminPageComponent', () => {
   let component: ProductListAdminPageComponent;
@@ -8,9 +9,11 @@ describe('ProductListAdminPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProductListAdminPageComponent ]
+      imports: [
+        ProductListAdminPageModule,
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -18,21 +18,19 @@ export class ProductFormComponent implements OnInit {
   constructor(private productService: ProductService, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    this.productData = this.newProduct();
+    this.newProduct();
   }
 
   newProduct() {
-    return new Product();
+    this.productData = new Product();
   }
 
   addProduct() {
-    console.log('>>> add product');
     const query = {
       name: this.productData.name,
       description: this.productData.description,
       price: this.productData.price,
     };
-    console.log(query);
     this.productService.post(query).subscribe(
       res => this.handleAddProductSuccess(res),
       error => this.handleAddProductError(error),
@@ -41,7 +39,7 @@ export class ProductFormComponent implements OnInit {
 
   handleAddProductSuccess(product: Product) {
     this.products.push(product);
-    this.productData = new Product();
+    this.newProduct();
     this.openAlertMessage('Criado com sucesso');
   }
 

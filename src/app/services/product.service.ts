@@ -25,4 +25,8 @@ export class ProductService {
   post(query): any {
     return this.http.post<Product>(API_URL + '/product', query);
   }
+
+  delete(id): any {
+    return this.http.delete(`${API_URL}/product/${id}`);
+  }
 }
