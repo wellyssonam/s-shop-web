@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { ProductServiceModule } from 'src/app/services/product';
 import { ProductListComponent } from './product-list.component';
@@ -24,6 +25,7 @@ import { ProductListComponent } from './product-list.component';
     MatIconModule,
     FlexLayoutModule,
     ProductServiceModule,
+    MatSnackBarModule,
   ],
   exports: [ProductListComponent],
 })

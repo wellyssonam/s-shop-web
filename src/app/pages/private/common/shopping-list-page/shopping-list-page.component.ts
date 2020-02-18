@@ -1,5 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { ShoppingListService } from 'src/app/services/shopping-list/shopping-list.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { ReplaySubject } from 'rxjs';
+import { ALL_ROUTES } from 'src/app/pages/pages-routing.map';
+import { ShoppingListService } from './../../../../services/shopping-list/shopping-list.service';
+
+const USER_ID = 82;
 
 @Component({
   selector: 'app-shopping-list-page',
@@ -9,38 +15,52 @@ import { ShoppingListService } from 'src/app/services/shopping-list/shopping-lis
 })
 export class ShoppingListPageComponent implements OnInit {
 
-  constructor(private shoppingListService: ShoppingListService) { }
+  purchasesList$ = new ReplaySubject<any[]>();
+
+  purchaseName: string;
+
+  constructor(
+    private shoppingListService: ShoppingListService,
+    private router: Router,
+    private snackBar: MatSnackBar,
+  ) { }
 
   ngOnInit() {
-    this.buildTable();
+    this.fetchAllProduct();
   }
 
-  buildTable() {
-    // this.loading$.next(true);
-    this.initializaLocalStorage();
-    // if (this.addButton) {
-    //   this.displayedColumns = this.displayedColumns.filter(res => res !== 'button');
-    // } else {
-    //   this.displayedColumns = this.displayedColumns.filter(res => res !== 'buttonQuantity');
-    // }
-    this.shoppingListService.setPurchasesCount(this.getLocalStorageItemsLength());
-    // this.setCurrentDataSource(this.products);
-    // this.loading$.next(false);
+  fetchAllProduct() {
+    const purchasesList = this.shoppingListService.getPurchasesLocalStorage();
+    this.purchasesList$.next(purchasesList);
   }
 
-  initializaLocalStorage() {
-    if (JSON.parse(localStorage.getItem('shoppingList')) == null) {
-      localStorage.setItem('shoppingList', JSON.stringify(
-        {
-          userId: 85,
-          items: [],
-        }
-      ));
-    }
+  getPurchasesCount = () => {
+    return this.shoppingListService.getPurchasesCount();
   }
 
-  getLocalStorageItemsLength() {
-    const data = JSON.parse(localStorage.getItem('shoppingList'));
-    return data !== null ? data.items.length : 0;
+  finish() {
+    let purchasesList = this.shoppingListService.getPurchasesLocalStorage();
+    purchasesList = purchasesList.map(data => ({
+      product_id: data.id,
+      amount: parseInt(data.amount),
+    }));
+    const result = {
+      user_id: USER_ID,
+      items: purchasesList,
+    };
+    this.shoppingListService.finishShoppingList(result).subscribe(res => this.handleFinishSuccess(res));
+  }
+
+  handleFinishSuccess(data: any) {
+    this.shoppingListService.updateLocalStorage([]);
+    this.shoppingListService.setPurchasesCount(0);
+    this.router.navigate([ALL_ROUTES.private.common.home]);
+    this.openAlertMessage('Compra realizada com sucesso', 4000);
+  }
+
+  openAlertMessage(message: string, time: number) {
+    this.snackBar.open(message, 'Fechar', {
+      duration: time,
+    });
   }
 }

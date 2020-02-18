@@ -10,12 +10,6 @@ const API_URL = 'https://s-shop-test.herokuapp.com';
 })
 export class ProductService {
 
-  config = {
-    headers: {
-      'Content-Type': 'application/json'
-    },
-  };
-
   constructor(private http: HttpClient) { }
 
   list(): Observable<Product[]> {

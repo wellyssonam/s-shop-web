@@ -1,1 +1,19 @@
-<p>shopping-list-page works!</p>
+<form (submit)="finish()" #shoppingListForm="ngForm">
+  <mat-form-field>
+    <input #nameField="ngModel" matInput name="name" type="text" [placeholder]="'Name'" [(ngModel)]="purchaseName"
+      required />
+    <mat-error *ngIf="!nameField.valid">
+      Campo Obrigatório
+    </mat-error>
+  </mat-form-field>
+
+  <ng-container *ngIf="purchasesList$ | async as purchasesList">
+    <app-product-list [products]="purchasesList" [showFilter]="false" [showAmountLine]="true" [showQuantity]="true"
+      [showPrice]="true" [showAmount]="true" [deleteButton]="true">
+    </app-product-list>
+
+    <button type="submit" class="purchase-btn" mat-flat-button color="primary"
+      [disabled]="(getPurchasesCount() | async) === 0 || !nameField.valid">Finalizar
+      Compra</button>
+  </ng-container>
+</form>

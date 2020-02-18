@@ -1,0 +1,20 @@
+.purchase-btn {
+  float: right;
+  margin-top: 24px;
+}
+
+mat-form-field {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  mat-form-field {
+    width: 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  mat-form-field {
+    width: 100%;
+  }
+}
