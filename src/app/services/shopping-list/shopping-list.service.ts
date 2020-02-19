@@ -4,12 +4,13 @@ import { ReplaySubject } from 'rxjs';
 
 const API_URL = 'https://s-shop-test.herokuapp.com';
 
-const USER_ID = 82;
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShoppingListService {
+
+  USER_ID = 82;
 
   purchasesCount$ = new ReplaySubject<number>();
 
@@ -23,21 +24,21 @@ export class ShoppingListService {
     return this.purchasesCount$.next(quantity);
   }
 
-  initializaLocalStorage() {
+  initializeShoppingListLocalStorage() {
     if (JSON.parse(localStorage.getItem('shoppingList')) == null) {
       localStorage.setItem('shoppingList', JSON.stringify(
         {
-          userId: USER_ID,
+          userId: this.USER_ID,
           items: [],
         }
       ));
     }
   }
 
-  updateLocalStorage(productList) {
+  updateShoppingListLocalStorage(productList) {
     localStorage.setItem('shoppingList', JSON.stringify(
       {
-        userId: USER_ID,
+        userId: this.USER_ID,
         items: productList,
       }
     ));
@@ -85,5 +86,37 @@ export class ShoppingListService {
     const data = this.http.post<any>(API_URL + '/order', query);
     localStorage.clear();
     return data;
+  }
+
+  orderList(): any {
+    return this.http.get<any>(API_URL + '/order');
+  }
+
+  searchOrder(id): any {
+    return this.http.get<any[]>(`${API_URL}/order/${id}`);
+  }
+
+  searchMultipleOrders(ids): any {
+    return ids.map(id => this.http.get<any[]>(`${API_URL}/order/${id}`));
+  }
+
+  initializeOrderListLocalStorage() {
+    if (JSON.parse(localStorage.getItem('orderList')) == null) {
+      this.updateOrderListLocalStorage([{ userId: this.USER_ID, orderList: [] }]);
+    } else {
+      const result = JSON.parse(localStorage.getItem('orderList'));
+      if (result.filter(data => data.userId === this.USER_ID).length === 0) {
+        result.push({ userId: this.USER_ID, orderList: [] });
+        this.updateOrderListLocalStorage(result);
+      }
+    }
+  }
+
+  updateOrderListLocalStorage(orderList) {
+    localStorage.setItem('orderList', JSON.stringify(orderList));
+  }
+
+  getOrderListLocalStorage(): any {
+    return JSON.parse(localStorage.getItem('orderList'));
   }
 }

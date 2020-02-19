@@ -15,9 +15,11 @@ const USER_ID = 82;
 })
 export class ShoppingListPageComponent implements OnInit {
 
-  purchasesList$ = new ReplaySubject<any[]>();
-
   purchaseName: string;
+
+  orderListLocalStorage;
+
+  purchasesList$ = new ReplaySubject<any[]>();
 
   constructor(
     private shoppingListService: ShoppingListService,
@@ -30,6 +32,8 @@ export class ShoppingListPageComponent implements OnInit {
   }
 
   fetchAllProduct() {
+    this.shoppingListService.initializeOrderListLocalStorage();
+    this.orderListLocalStorage = this.shoppingListService.getOrderListLocalStorage();
     const purchasesList = this.shoppingListService.getPurchasesLocalStorage();
     this.purchasesList$.next(purchasesList);
   }
@@ -52,7 +56,12 @@ export class ShoppingListPageComponent implements OnInit {
   }
 
   handleFinishSuccess(data: any) {
-    this.shoppingListService.updateLocalStorage([]);
+    const orderListLocalStorageAux = this.orderListLocalStorage.filter(order => order.userId !== USER_ID);
+    const orderListLocalStorageByUserId = this.orderListLocalStorage.filter(order => order.userId === USER_ID)[0];
+    orderListLocalStorageByUserId.orderList.push({ orderName: this.purchaseName, orderId: data.id });
+    orderListLocalStorageAux.push(orderListLocalStorageByUserId);
+    this.shoppingListService.updateOrderListLocalStorage(orderListLocalStorageAux);
+    this.shoppingListService.updateShoppingListLocalStorage([]);
     this.shoppingListService.setPurchasesCount(0);
     this.router.navigate([ALL_ROUTES.private.common.home]);
     this.openAlertMessage('Compra realizada com sucesso', 4000);

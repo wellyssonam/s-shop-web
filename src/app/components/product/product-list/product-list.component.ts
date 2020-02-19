@@ -15,7 +15,7 @@ import { ShoppingListService } from './../../../services/shopping-list/shopping-
 })
 export class ProductListComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'description'];
+  displayedColumns: string[] = [];
 
   productList;
 
@@ -49,6 +49,14 @@ export class ProductListComponent implements OnInit {
 
   @Input() showQuantity: boolean;
 
+  @Input() showOrderName: boolean;
+
+  @Input() showProductName = true;
+
+  @Input() showDescription = true;
+
+  @Input() showTotal: boolean;
+
   @Input() addButton: boolean;
 
   @Input() deleteButton: boolean;
@@ -69,15 +77,27 @@ export class ProductListComponent implements OnInit {
 
   buildTable() {
     this.loading$.next(true);
-    this.shoppingListService.initializaLocalStorage();
+    this.shoppingListService.initializeShoppingListLocalStorage();
+    if (this.showOrderName) {
+      this.displayedColumns.push('showOrderName');
+    }
     if (this.showQuantity) {
-      this.displayedColumns = ['showQuantity'].concat(this.displayedColumns);
+      this.displayedColumns.push('showQuantity');
+    }
+    if (this.showProductName) {
+      this.displayedColumns.push('showProductName');
+    }
+    if (this.showDescription) {
+      this.displayedColumns.push('showDescription');
     }
     if (this.showPrice) {
       this.displayedColumns.push('showPrice');
     }
     if (this.showAmount) {
       this.displayedColumns.push('showAmount');
+    }
+    if (this.showTotal) {
+      this.displayedColumns.push('showTotal');
     }
     if (this.addButton) {
       this.displayedColumns.push('buttonQuantity');
@@ -162,7 +182,7 @@ export class ProductListComponent implements OnInit {
       this.openAlertMessage(message, 8000);
     } else {
       productList.push({ product: item, amount: $event.value });
-      this.shoppingListService.updateLocalStorage(productList);
+      this.shoppingListService.updateShoppingListLocalStorage(productList);
       this.shoppingListService.setPurchasesCount(productList.length);
     }
     $event.value = '';

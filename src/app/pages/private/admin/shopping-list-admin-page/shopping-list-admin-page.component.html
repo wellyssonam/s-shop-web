@@ -1,1 +1,5 @@
-<p>shopping-list-admin-page works!</p>
+<ng-container *ngIf="orderList$ | async as orderList">
+  <app-product-list [products]="orderList" [showAmountLine]="false" [showOrderName]="true" [showQuantity]="true"
+    [showTotal]="true" [showProductName]="false" [showDescription]="false">
+  </app-product-list>
+</ng-container>
