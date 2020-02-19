@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { BehaviorSubject, ReplaySubject } from 'rxjs';
 import { Product } from 'src/app/models/product/product.model';
 import { ProductService } from 'src/app/services/product';
+import { SpinnerService } from 'src/app/services/spinner/spinner.service';
 import { ShoppingListService } from './../../../services/shopping-list/shopping-list.service';
 
 @Component({
@@ -69,6 +70,7 @@ export class ProductListComponent implements OnInit {
     private productService: ProductService,
     private shoppingListService: ShoppingListService,
     private snackBar: MatSnackBar,
+    private spinnerService: SpinnerService,
   ) { }
 
   ngOnInit(): void {
@@ -76,6 +78,7 @@ export class ProductListComponent implements OnInit {
   }
 
   buildTable() {
+    this.spinnerService.startLoading();
     this.loading$.next(true);
     this.shoppingListService.initializeShoppingListLocalStorage();
     if (this.showOrderName) {
@@ -111,6 +114,7 @@ export class ProductListComponent implements OnInit {
     this.shoppingListService.setPurchasesCount(this.getLocalStorageItemsLength());
     this.setCurrentDataSource(this.products);
     this.loading$.next(false);
+    this.spinnerService.stopLoading();
   }
 
   getLocalStorageItemsLength() {
