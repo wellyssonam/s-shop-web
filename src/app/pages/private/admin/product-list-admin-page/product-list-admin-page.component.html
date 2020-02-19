@@ -1,1 +1,5 @@
-<p>product-list-admin-page works!</p>
+<ng-container *ngIf="productList$ | async as productList">
+  <app-product-form [products]="productList"></app-product-form>
+  <app-product-list [products]="productList" [showAmountLine]="false" [deleteProductButton]="true">
+  </app-product-list>
+</ng-container>

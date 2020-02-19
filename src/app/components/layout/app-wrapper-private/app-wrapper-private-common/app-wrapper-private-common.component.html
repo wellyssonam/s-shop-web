@@ -1,11 +1,13 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav mode="side" opened>
-    <div fxLayout="column">
+    <div>
       <div class="sidenav-item">
         <a [routerLink]="allRoutes.private.common.home">Home</a>
       </div>
       <div class="sidenav-item">
-        <a [routerLink]="allRoutes.private.common.shoppingList">Cesta</a>
+        <a [routerLink]="allRoutes.private.common.shoppingList">
+          Cesta <span class="count">{{ getPurchasesCount() | async }}</span>
+        </a>
       </div>
     </div>
   </mat-sidenav>

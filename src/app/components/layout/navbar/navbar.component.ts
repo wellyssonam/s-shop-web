@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ALL_ROUTES } from 'src/app/pages/pages-routing.map';
+import { ShoppingListService } from 'src/app/services/shopping-list/shopping-list.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  allRotes = ALL_ROUTES;
+
+  constructor(private shoppingListService: ShoppingListService, ) { }
 
   ngOnInit() {
   }
-
 }
