@@ -1,4 +1,6 @@
 <ng-container *ngIf="productList$ | async as productList">
+  <app-breadcrumb [linkList]="listLinkBreadcrumb"></app-breadcrumb>
+
   <app-product-list [products]="productList" [showAmountLine]="false" [showPrice]="true" [addButton]="true">
   </app-product-list>
 </ng-container>

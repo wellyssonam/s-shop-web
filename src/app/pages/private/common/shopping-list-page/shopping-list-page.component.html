@@ -1,4 +1,6 @@
 <form (submit)="finish()" #shoppingListForm="ngForm">
+  <app-breadcrumb [linkList]="listLinkBreadcrumb"></app-breadcrumb>
+
   <mat-form-field>
     <input #nameField="ngModel" matInput name="name" type="text" [placeholder]="'Name'" [(ngModel)]="purchaseName"
       required />

@@ -19,6 +19,8 @@ export class ShoppingListPageComponent implements OnInit {
 
   orderListLocalStorage;
 
+  listLinkBreadcrumb = [];
+
   purchasesList$ = new ReplaySubject<any[]>();
 
   constructor(
@@ -31,7 +33,12 @@ export class ShoppingListPageComponent implements OnInit {
     this.fetchAllProduct();
   }
 
+  mountBreadcrumb() {
+    this.listLinkBreadcrumb.push({ name: 'Cesta', link: ALL_ROUTES.private.common.shoppingList });
+  }
+
   fetchAllProduct() {
+    this.mountBreadcrumb();
     this.shoppingListService.initializeOrderListLocalStorage();
     this.orderListLocalStorage = this.shoppingListService.getOrderListLocalStorage();
     const purchasesList = this.shoppingListService.getPurchasesLocalStorage();

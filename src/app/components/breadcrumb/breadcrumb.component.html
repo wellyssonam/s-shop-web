@@ -1,0 +1,7 @@
+<ng-container>
+  <div class="breadcrumb" fxLayout="row" fxLayoutGap="16px">
+    <div class="link" *ngFor="let item of linkList">
+      <a [routerLink]="item.link">{{ item.name }}</a>
+    </div>
+  </div>
+</ng-container>

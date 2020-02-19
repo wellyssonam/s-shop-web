@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { forkJoin, ReplaySubject } from 'rxjs';
 import { Product } from 'src/app/models/product/product.model';
+import { ALL_ROUTES } from 'src/app/pages/pages-routing.map';
 import { ShoppingListService } from 'src/app/services/shopping-list/shopping-list.service';
 import { ProductService } from './../../../../services/product/product.service';
 
@@ -13,6 +14,8 @@ import { ProductService } from './../../../../services/product/product.service';
 export class ShoppingListAdminPageComponent implements OnInit {
 
   products: Product[];
+
+  listLinkBreadcrumb = [];
 
   orderListLocalStorage;
 
@@ -30,6 +33,7 @@ export class ShoppingListAdminPageComponent implements OnInit {
   }
 
   fetchInitialData() {
+    this.mountBreadcrumb();
     this.USER_ID = this.shoppingListService.USER_ID;
     this.shoppingListService.initializeOrderListLocalStorage();
     this.orderListLocalStorage = this.shoppingListService.getOrderListLocalStorage();
@@ -38,6 +42,11 @@ export class ShoppingListAdminPageComponent implements OnInit {
       this.shoppingListService.orderList(),
       this.productService.list(),
     ]).subscribe(res => this.handleFetchInitialDataSuccess(res));
+  }
+
+  mountBreadcrumb() {
+    this.listLinkBreadcrumb.push({ name: 'Admin', link: ALL_ROUTES.private.admin.productList });
+    this.listLinkBreadcrumb.push({ name: 'Compras', link: ALL_ROUTES.private.admin.orderList });
   }
 
   handleFetchInitialDataSuccess(result) {
