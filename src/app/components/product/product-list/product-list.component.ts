@@ -181,7 +181,7 @@ export class ProductListComponent implements OnInit {
     const message = `
       Este produto já se encontra em sua CESTA de compras.
       Remova da CESTA para poder inserir novamente este produto.
-    `
+    `;
     if (productList.filter(data => data.product.id === item.id).length > 0) {
       this.openAlertMessage(message, 8000);
     } else {

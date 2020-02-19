@@ -53,7 +53,7 @@ export class ShoppingListPageComponent implements OnInit {
     let purchasesList = this.shoppingListService.getPurchasesLocalStorage();
     purchasesList = purchasesList.map(data => ({
       product_id: data.id,
-      amount: parseInt(data.amount),
+      amount: +(data.amount),
     }));
     const result = {
       user_id: USER_ID,

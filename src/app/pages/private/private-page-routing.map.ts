@@ -4,4 +4,4 @@ import { privateCommonRoutes } from './common/private-common-pages-routing.map';
 export const privatePagesRoutes = {
   common: privateCommonRoutes,
   admin: privateAdminRoutes,
-}
+};

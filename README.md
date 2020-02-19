@@ -1,27 +1,79 @@
-# SShopWeb
+# Desafio | Frontend Developer
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.9.
+## Etapas de Instalação e Execução
 
-## Development server
+1 - Primeiro certifique-se de que possui o node instalado para utilizar os comandos npm, para isso em seu terminal digite:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+> npm -v
 
-## Code scaffolding
+2 - Se o node não estiver instalado acesse o site para download (**[node](https://nodejs.org/en/download/)**)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+3 - Após instalação das dependências o projeto poderá ser executado, para isso acesse o diretório "s-shop-web" pelo terminal, verifique se encontra-se na branch "master" e então execute o comando para a instalação de todas as dependência presentes no projeto.
 
-## Build
+> 'npm install' ou 'npm i'
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+4 - No mesmo diretório digite o camando para executar o projeto.
 
-## Running unit tests
+> 'ng serve'ou 'ng s'
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+5 - Para checar código em busca de possíveis erros seguindo o padrão da linguagem.
 
-## Running end-to-end tests
+> 'ng lint' ou 'ng l'
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+6 - Para fazer build
 
-## Further help
+> 'ng build --prod' ou 'ng b --prod'
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+---
+
+## Sobre o Projeto
+
+O desafio consiste em desenvolver um front-end Web para uma API já existente de um sistema do tipo "carrinho de compras".
+
+---
+
+### Tecnologias
+
+-> obrigátorias
+
+- AngularJS +v1.5.x
+
+-> Desejáveis
+
+- AngularJS Material versão +1.x.x
+- scss para processador de css.
+
+-> Opcionais
+
+- Gulp
+- Webpack
+
+---
+
+### Melhorias Feitas
+
+- Ao entrar na página inicial do visitante e do admin será exibido um 'spinner' para indicar carregamento da página.
+- Realização de alguns testes autônomos.
+
+---
+
+### Não Foi Possível Fazer
+
+- Não foi possível realizar todos os testes autônomos.
+- Não foi possível utilizar tecnologia GULP no projeto.
+- Trocar sidebar da lateral para o top quando mobile (Deixei para fazer por último e esqueci.)
+
+---
+
+### Ajustes/Melhorias Futuras (Versão 2.0)
+
+- Fechar testes autônomos em 100%.
+- Exibição de loading em todas as páginas que existirem requisições no carregamento da página.
+- Usar tecnologia GULP no projeto.
+- Trocar sidebar da lateral para o top quando mobile
+
+---
+
+### Página Publicada
+
+Acessar página **[s-shop-web](https://s-shop-web.now.sh/)**
