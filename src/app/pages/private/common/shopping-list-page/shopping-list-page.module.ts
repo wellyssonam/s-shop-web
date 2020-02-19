@@ -9,6 +9,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ProductListModule } from 'src/app/components/product/product-list/product-list.module';
 import { ProductServiceModule } from 'src/app/services/product';
 import { ShoppingListModule } from 'src/app/services/shopping-list/shopping-list.module';
+import { BreadcrumbModule } from './../../../../components/breadcrumb/breadcrumb.module';
 import { ShoppingListPageRoutingModule } from './shopping-list-page-routing.module';
 import { ShoppingListPageComponent } from './shopping-list-page.component';
 
@@ -28,6 +29,7 @@ import { ShoppingListPageComponent } from './shopping-list-page.component';
     FlexLayoutModule,
     ShoppingListModule,
     MatSnackBarModule,
+    BreadcrumbModule,
   ]
 })
 export class ShoppingListPageModule { }
